@@ -1387,6 +1387,32 @@ public class MyApplicationInterface extends BasicApplicationInterface {
     }
 
     @Override
+    public double getIsoBracketingStopsPref() {
+        if( MyDebug.LOG )
+            Log.d(TAG, "getIsoBracketingStopsPref");
+        double n_stops;
+        PhotoMode photo_mode = getPhotoMode();
+        if( photo_mode == PhotoMode.HDR ) {
+            // always set 2 stops for HDR
+            n_stops = 2.0;
+        }
+        else {
+            String n_stops_s = sharedPreferences.getString(PreferenceKeys.IsoBracketingStopsPreferenceKey, "2");
+            try {
+                n_stops = Double.parseDouble(n_stops_s);
+            }
+            catch(NumberFormatException exception) {
+                if( MyDebug.LOG )
+                    Log.e(TAG, "n_stops_s invalid format: " + n_stops_s);
+                n_stops = 2.0;
+            }
+        }
+        if( MyDebug.LOG )
+            Log.d(TAG, "n_stops = " + n_stops);
+        return n_stops;
+    }
+
+    @Override
     public int getFocusBracketingNImagesPref() {
         if( MyDebug.LOG )
             Log.d(TAG, "getFocusBracketingNImagesPref");
@@ -1473,7 +1499,7 @@ public class MyApplicationInterface extends BasicApplicationInterface {
         if( photo_mode == PhotoMode.Standard || photo_mode == PhotoMode.DRO ) {
             return true;
         }
-        else if( photo_mode == PhotoMode.ExpoBracketing ) {
+        else if( photo_mode == PhotoMode.ExpoBracketing || photo_mode == PhotoMode.FastBurst ) {
             return sharedPreferences.getBoolean(PreferenceKeys.AllowRawForExpoBracketingPreferenceKey, true) &&
                     main_activity.supportsBurstRaw();
         }

@@ -325,7 +325,7 @@ public class ImageSaver extends Thread {
             max_queue_size = 6;
         }
         //max_queue_size = 1;
-        //max_queue_size = 3;
+        max_queue_size = 256;
         if( MyDebug.LOG )
             Log.d(TAG, "max_queue_size = " + max_queue_size);
         return max_queue_size;

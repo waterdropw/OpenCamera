@@ -93,9 +93,10 @@ public class CameraController2 extends CameraController {
 
     private BurstType burst_type = BurstType.BURSTTYPE_NONE;
     // for BURSTTYPE_EXPO:
-    private final static int max_expo_bracketing_n_images = 5; // could be more, but limit to 5 for now
+    private final static int max_expo_bracketing_n_images = 17; // could be more, but limit to 5 for now
     private int expo_bracketing_n_images = 3;
     private double expo_bracketing_stops = 2.0;
+    private double iso_bracketing_stops = 0.0;
     private boolean use_expo_fast_burst = true;
     // for BURSTTYPE_FOCUS:
     private boolean focus_bracketing_in_progress; // whether focus bracketing in progress; set back to false to cancel
@@ -3354,14 +3355,24 @@ public class CameraController2 extends CameraController {
     public void setExpoBracketingStops(double stops) {
         if( MyDebug.LOG )
             Log.d(TAG, "setExpoBracketingStops: " + stops);
-        if( stops <= 0.0 ) {
-            if( MyDebug.LOG )
-                Log.e(TAG, "stops should be positive");
-            throw new RuntimeException(); // throw as RuntimeException, as this is a programming error
-        }
+        // if( stops <= 0.0 ) {
+        //     if( MyDebug.LOG )
+        //         Log.e(TAG, "stops should be positive");
+        //     throw new RuntimeException(); // throw as RuntimeException, as this is a programming error
+        // }
         this.expo_bracketing_stops = stops;
     }
-
+    @Override
+    public void setIsoBracketingStops(double stops) {
+        if( MyDebug.LOG )
+            Log.d(TAG, "setIsoBracketingStops: " + stops);
+        // if( stops <= 0.0 ) {
+        //     if( MyDebug.LOG )
+        //         Log.e(TAG, "stops should be positive");
+        //     throw new RuntimeException(); // throw as RuntimeException, as this is a programming error
+        // }
+        this.iso_bracketing_stops = stops;
+    }
     @Override
     public void setUseExpoFastBurst(boolean use_expo_fast_burst) {
         if( MyDebug.LOG )
@@ -5535,7 +5546,9 @@ public class CameraController2 extends CameraController {
                     test_fake_flash_photo++;
                 }
                 // else don't turn torch off, as user may be in torch on mode
-
+                int base_iso = 100;
+                int min_iso = base_iso;
+                int max_iso = base_iso;
                 Range<Integer> iso_range = characteristics.get(CameraCharacteristics.SENSOR_INFO_SENSITIVITY_RANGE); // may be null on some devices
                 if( iso_range == null ) {
                     Log.e(TAG, "takePictureBurstBracketing called but null iso_range");
@@ -5555,6 +5568,9 @@ public class CameraController2 extends CameraController {
                     iso = Math.max(iso, iso_range.getLower());
                     iso = Math.min(iso, iso_range.getUpper());
                     stillBuilder.set(CaptureRequest.SENSOR_SENSITIVITY, iso );
+                    base_iso = iso;
+                    min_iso = iso_range.getLower();
+                    max_iso = iso_range.getUpper();
                 }
                 if( capture_result_has_frame_duration  )
                     stillBuilder.set(CaptureRequest.SENSOR_FRAME_DURATION, capture_result_frame_duration);
@@ -5571,6 +5587,7 @@ public class CameraController2 extends CameraController {
                 long min_exposure_time = base_exposure_time;
                 long max_exposure_time = base_exposure_time;
                 final double scale = Math.pow(2.0, expo_bracketing_stops/(double)n_half_images);
+                final double scale_iso = Math.pow(2.0, iso_bracketing_stops/(double)n_half_images);
                 Range<Long> exposure_time_range = characteristics.get(CameraCharacteristics.SENSOR_INFO_EXPOSURE_TIME_RANGE); // may be null on some devices
                 if( exposure_time_range != null ) {
                     min_exposure_time = exposure_time_range.getLower();
@@ -5589,6 +5606,7 @@ public class CameraController2 extends CameraController {
                 // darker images
                 for(int i=0;i<n_half_images;i++) {
                     long exposure_time = base_exposure_time;
+                    int iso = base_iso;
                     if( exposure_time_range != null ) {
                         double this_scale = scale;
                         for(int j=i;j<n_half_images-1;j++)
@@ -5602,21 +5620,37 @@ public class CameraController2 extends CameraController {
                             Log.d(TAG, "    exposure_time: " + exposure_time);
                         }
                         stillBuilder.set(CaptureRequest.SENSOR_EXPOSURE_TIME, exposure_time);
-                        stillBuilder.setTag(new RequestTagObject(RequestTagType.CAPTURE_BURST_IN_PROGRESS));
-                        requests.add( stillBuilder.build() );
                     }
+                    if (iso_range != null) {
+                        double this_scale = scale_iso;
+                        for(int j=i;j<n_half_images-1;j++)
+                            this_scale *= scale_iso;
+                        iso /= this_scale;
+                        if( iso < min_iso )
+                            iso = min_iso;
+                        if( MyDebug.LOG ) {
+                        Log.d(TAG, "add burst request for " + i + "th dark image:");
+                        Log.d(TAG, "    iso_scale: " + this_scale);
+                        Log.d(TAG, "    iso: " + iso);
+                        }
+                        stillBuilder.set(CaptureRequest.SENSOR_SENSITIVITY, iso);
+                    }
+                    stillBuilder.setTag(new RequestTagObject(RequestTagType.CAPTURE_BURST_IN_PROGRESS));
+                    requests.add( stillBuilder.build() );
                 }
 
                 // base image
                 if( MyDebug.LOG )
                     Log.d(TAG, "add burst request for base image");
                 stillBuilder.set(CaptureRequest.SENSOR_EXPOSURE_TIME, base_exposure_time);
+                stillBuilder.set(CaptureRequest.SENSOR_SENSITIVITY, base_iso);
                 stillBuilder.setTag(new RequestTagObject(RequestTagType.CAPTURE_BURST_IN_PROGRESS));
                 requests.add( stillBuilder.build() );
 
                 // lighter images
                 for(int i=0;i<n_half_images;i++) {
                     long exposure_time = base_exposure_time;
+                    int iso = base_iso;
                     if( exposure_time_range != null ) {
                         double this_scale = scale;
                         for(int j=0;j<i;j++)
@@ -5630,20 +5664,34 @@ public class CameraController2 extends CameraController {
                             Log.d(TAG, "    exposure_time: " + exposure_time);
                         }
                         stillBuilder.set(CaptureRequest.SENSOR_EXPOSURE_TIME, exposure_time);
-                        if( i == n_half_images - 1 ) {
-                            // RequestTagType.CAPTURE should only be set for the last request, otherwise we'll may do things like turning
-                            // off torch (for fake flash) before all images are received
-                            // More generally, doesn't seem a good idea to be doing the post-capture commands (resetting ae state etc)
-                            // multiple times, and before all captures are complete!
-                            if( MyDebug.LOG )
-                                Log.d(TAG, "set RequestTagType.CAPTURE for last burst request");
-                            stillBuilder.setTag(new RequestTagObject(RequestTagType.CAPTURE));
-                        }
-                        else {
-                            stillBuilder.setTag(new RequestTagObject(RequestTagType.CAPTURE_BURST_IN_PROGRESS));
-                        }
-                        requests.add( stillBuilder.build() );
                     }
+                    if( iso_range != null ) {
+                        double this_scale = scale_iso;
+                        for(int j=0;j<i;j++)
+                            this_scale *= scale_iso;
+                        iso *= this_scale;
+                        if( iso > max_iso )
+                            iso = max_iso;
+//                        if( MyDebug.LOG ) {
+                        Log.d(TAG, "add burst request for " + i + "th light image:");
+                        Log.d(TAG, "    iso_scale: " + this_scale);
+                        Log.d(TAG, "    iso: " + iso);
+//                        }
+                        stillBuilder.set(CaptureRequest.SENSOR_SENSITIVITY, iso);
+                    }
+                    if( i == n_half_images - 1 ) {
+                        // RequestTagType.CAPTURE should only be set for the last request, otherwise we'll may do things like turning
+                        // off torch (for fake flash) before all images are received
+                        // More generally, doesn't seem a good idea to be doing the post-capture commands (resetting ae state etc)
+                        // multiple times, and before all captures are complete!
+//                            if( MyDebug.LOG )
+                        Log.d(TAG, "set RequestTagType.CAPTURE for last burst request");
+                        stillBuilder.setTag(new RequestTagObject(RequestTagType.CAPTURE));
+                    }
+                    else {
+                        stillBuilder.setTag(new RequestTagObject(RequestTagType.CAPTURE_BURST_IN_PROGRESS));
+                    }
+                    requests.add( stillBuilder.build() );
                 }
 
                 burst_single_request = true;

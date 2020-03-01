@@ -774,7 +774,15 @@
                 android:entryValues="@array/preference_expo_bracketing_stops_values"
                 android:defaultValue="2"
                 />
-
+            <!--  if we move this to another PreferenceGroup, we should update code to remove this Preference -->
+            <ListPreference
+                android:key="preference_iso_bracketing_stops"
+                android:title="@string/preference_iso_bracketing_stops"
+                android:summary="@string/preference_iso_bracketing_stops_summary"
+                android:entries="@array/preference_iso_bracketing_stops_entries"
+                android:entryValues="@array/preference_iso_bracketing_stops_values"
+                android:defaultValue="2"
+                />
             <!--  if we move this to another PreferenceGroup, we should update code to remove this Preference -->
             <ListPreference
                 android:key="preference_panorama_crop"

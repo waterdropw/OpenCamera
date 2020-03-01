@@ -296,22 +296,64 @@
     <string-array name="preference_expo_bracketing_n_images_entries">
         <item>3</item>
         <item>5</item>
+        <item>7</item>
+        <item>9</item>
+        <item>17</item>
     </string-array>
     <string-array name="preference_expo_bracketing_n_images_values">
         <item>3</item>
         <item>5</item>
+        <item>7</item>
+        <item>9</item>
+        <item>17</item>
     </string-array>
     <string-array name="preference_expo_bracketing_stops_entries">
+        <item>0</item>
         <item>0.5</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
     </string-array>
     <string-array name="preference_expo_bracketing_stops_values">
+        <item>0</item>
         <item>0.5</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+    <string-array name="preference_iso_bracketing_stops_entries">
+        <item>0</item>
+        <item>0.5</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+    <string-array name="preference_iso_bracketing_stops_values">
+        <item>0</item>
+        <item>0.5</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
     </string-array>
     <string-array name="preference_front_camera_mirror_entries">
         <item>No mirror</item>
@@ -458,6 +500,7 @@
         <item>@string/preference_fast_burst_n_images_entries_12</item>
         <item>@string/preference_fast_burst_n_images_entries_15</item>
         <item>@string/preference_fast_burst_n_images_entries_20</item>
+        <item>@string/preference_fast_burst_n_images_entries_30</item>
     </string-array>
     <string-array name="preference_fast_burst_n_images_values">
         <item>2</item>
@@ -470,6 +513,7 @@
         <item>12</item>
         <item>15</item>
         <item>20</item>
+        <item>30</item>
     </string-array>
     <string-array name="preference_focus_bracketing_n_images_entries">
         <item>@string/preference_focus_bracketing_n_images_entries_2</item>

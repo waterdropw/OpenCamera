@@ -393,6 +393,7 @@ public abstract class CameraController {
     /** Only relevant if setBurstType() is also called with BURSTTYPE_EXPO.
      */
     public abstract void setExpoBracketingStops(double stops);
+    public abstract void setIsoBracketingStops(double stops);
     public abstract void setUseExpoFastBurst(boolean use_expo_fast_burst);
     public abstract boolean isBurstOrExpo();
     /** If true, then the camera controller is currently capturing a burst of images.

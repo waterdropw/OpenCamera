@@ -100,6 +100,7 @@ public interface ApplicationInterface {
     boolean isExpoBracketingPref(); // whether to enable burst photos with expo bracketing
     int getExpoBracketingNImagesPref(); // how many images to take for exposure bracketing
     double getExpoBracketingStopsPref(); // stops per image for exposure bracketing
+    double getIsoBracketingStopsPref(); // stops per image for exposure bracketing
     int getFocusBracketingNImagesPref(); // how many images to take for focus bracketing
     boolean getFocusBracketingAddInfinityPref(); // whether to include an additional image at infinite focus distance, for focus bracketing
     boolean isFocusBracketingPref(); // whether to enable burst photos with focus bracketing

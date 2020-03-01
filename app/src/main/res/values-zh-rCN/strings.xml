@@ -353,9 +353,13 @@
     <string name="preference_category_video_debugging">调试选项</string>
     <string name="preference_camera2_fake_flash">使用替代闪光灯的方法</string>
     <string name="preference_camera2_fake_flash_summary">如果您的设备使用Camera2 API时闪光灯有异常，请启用此功能</string>
-    <string name="preference_expo_bracketing_n_images">包围曝光</string>
-    <string name="preference_expo_bracketing_stops">包围曝光步长</string>
-    <string name="preference_expo_bracketing_stops_summary">最亮/最暗的图像曝光量增减值\n%s</string>
+    <string name="preference_expo_bracketing_n_images">包围曝光连拍张数（奇数，中心均匀增减）</string>
+    <string name="preference_expo_bracketing_stops">包围曝光步长（expo）</string>
+    <string name="preference_expo_bracketing_stops_summary">最亮/最暗的图像曝光量（expo）增减值，填0无增减\n%s</string>
+    <string name="preference_iso_bracketing_stops">包围曝光步长（iso）</string>
+    <string name="preference_iso_bracketing_stops_summary">最亮/最暗的图像曝光量（iso）增减值，填0无增减\n%s</string>
+
+
     <string name="preference_nr_save">原图降噪</string>
     <string name="preference_nr_save_all">保存所有的原图（慢）</string>
     <string name="preference_nr_save_no">不保存原图</string>

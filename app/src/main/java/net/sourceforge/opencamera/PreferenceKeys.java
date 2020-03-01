@@ -39,7 +39,7 @@ public class PreferenceKeys {
      */
     public static final String MagneticAccuracyPreferenceKey = "done_magnetic_accuracy";
 
-    public static final String CameraAPIPreferenceDefault = "preference_camera_api_old";
+    public static final String CameraAPIPreferenceDefault = "preference_camera_api_camera2";
     public static final String CameraAPIPreferenceKey = "preference_camera_api";
 
     public static String getFlashPreferenceKey(int cameraId) {
@@ -97,6 +97,8 @@ public class PreferenceKeys {
     public static final String ExpoBracketingNImagesPreferenceKey = "preference_expo_bracketing_n_images";
 
     public static final String ExpoBracketingStopsPreferenceKey = "preference_expo_bracketing_stops";
+
+    public static final String IsoBracketingStopsPreferenceKey = "preference_iso_bracketing_stops";
 
     public static final String FocusDistancePreferenceKey = "preference_focus_distance";
 

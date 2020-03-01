@@ -39,6 +39,7 @@ public class CameraController1 extends CameraController {
     private final static int max_expo_bracketing_n_images = 3; // seem to have problems with 5 images in some cases, e.g., images coming out same brightness on OnePlus 3T
     private int expo_bracketing_n_images = 3;
     private double expo_bracketing_stops = 2.0;
+    private double iso_bracketing_stops = 2.0;
 
     // we keep track of some camera settings rather than reading from Camera.getParameters() every time. Firstly this is important
     // for performance (affects UI rendering times, e.g., see profiling of GPU rendering). Secondly runtimeexceptions from
@@ -822,12 +823,23 @@ public class CameraController1 extends CameraController {
     public void setExpoBracketingStops(double stops) {
         if( MyDebug.LOG )
             Log.d(TAG, "setExpoBracketingStops: " + stops);
-        if( stops <= 0.0 ) {
-            if( MyDebug.LOG )
-                Log.e(TAG, "stops should be positive");
-            throw new RuntimeException(); // throw as RuntimeException, as this is a programming error
-        }
+        // if( stops <= 0.0 ) {
+        //     if( MyDebug.LOG )
+        //         Log.e(TAG, "stops should be positive");
+        //     throw new RuntimeException(); // throw as RuntimeException, as this is a programming error
+        // }
         this.expo_bracketing_stops = stops;
+    }
+    @Override
+    public void setIsoBracketingStops(double stops) {
+        if( MyDebug.LOG )
+            Log.d(TAG, "setIsoBracketingStops: " + stops);
+        // if( stops <= 0.0 ) {
+        //     if( MyDebug.LOG )
+        //         Log.e(TAG, "stops should be positive");
+        //     throw new RuntimeException(); // throw as RuntimeException, as this is a programming error
+        // }
+        this.iso_bracketing_stops = stops;
     }
 
     @Override

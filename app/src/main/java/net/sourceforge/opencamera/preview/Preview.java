@@ -1923,6 +1923,7 @@ public class Preview implements SurfaceHolder.Callback, TextureView.SurfaceTextu
             camera_controller.setBurstType(CameraController.BurstType.BURSTTYPE_EXPO);
             camera_controller.setExpoBracketingNImages( applicationInterface.getExpoBracketingNImagesPref() );
             camera_controller.setExpoBracketingStops( applicationInterface.getExpoBracketingStopsPref() );
+            camera_controller.setIsoBracketingStops( applicationInterface.getIsoBracketingStopsPref() );
             // setUseExpoFastBurst called when taking a photo
         }
         else if( this.supports_focus_bracketing && applicationInterface.isFocusBracketingPref() ) {

@@ -309,6 +309,11 @@ public abstract class BasicApplicationInterface implements ApplicationInterface 
     }
 
     @Override
+    public double getIsoBracketingStopsPref() {
+        return 2.0;
+    }
+
+    @Override
     public int getFocusBracketingNImagesPref() {
         return 3;
     }

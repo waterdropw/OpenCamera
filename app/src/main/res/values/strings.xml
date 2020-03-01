@@ -314,10 +314,12 @@
     <string name="preference_camera2_fake_flash">Use alternative flash method</string>
     <string name="preference_camera2_fake_flash_summary">Enable this if your device has buggy flash behaviour with Camera2 API</string>
 
-    <string name="preference_expo_bracketing_n_images">Exposure Bracketing</string>
-    <string name="preference_expo_bracketing_n_images_summary">Number of images for exposure bracketing mode\n%s</string>
+    <string name="preference_expo_bracketing_n_images">Exposure/ISO Bracketing</string>
+    <string name="preference_expo_bracketing_n_images_summary">Number of images for exposure/ISO bracketing mode\n%s</string>
     <string name="preference_expo_bracketing_stops">Exposure Bracketing Stops</string>
-    <string name="preference_expo_bracketing_stops_summary">How many stops to subtract/add for the darkest/brightest image\n%s</string>
+    <string name="preference_expo_bracketing_stops_summary">How many stops(expo) to subtract/add for the darkest/brightest image, if no need put it 0\n%s</string>
+    <string name="preference_iso_bracketing_stops">ISO Bracketing Stops</string>
+    <string name="preference_iso_bracketing_stops_summary">How many stops(iso) to subtract/add for the darkest/brightest image, if no need put it 0\n%s</string>
 
     <string name="preference_nr_save">Noise Reduction original images</string>
     <string name="preference_nr_save_summary">Whether to save original images in noise reduction mode. Note this can make saving photos much slower.\n%s</string>
@@ -486,6 +488,7 @@
     <string name="preference_fast_burst_n_images_entries_12">12</string>
     <string name="preference_fast_burst_n_images_entries_15">15</string>
     <string name="preference_fast_burst_n_images_entries_20">20</string>
+    <string name="preference_fast_burst_n_images_entries_30">30</string>
 
     <string name="preference_focus_bracketing_n_images">Number of photos</string>
     <string name="preference_focus_bracketing_n_images_entries_2">2</string>
