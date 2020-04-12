@@ -353,7 +353,10 @@
     <string name="preference_category_video_debugging">调试选项</string>
     <string name="preference_camera2_fake_flash">使用替代闪光灯的方法</string>
     <string name="preference_camera2_fake_flash_summary">如果您的设备使用Camera2 API时闪光灯有异常，请启用此功能</string>
-    <string name="preference_expo_bracketing_n_images">包围曝光连拍张数（奇数，中心均匀增减）</string>
+    <string name="preference_expo_bracketing_n_images">包围曝光连拍总共张数</string>
+    <string name="preference_expo_bracketing_n_images_summary">奇数，中心均匀增减，如果设置了每个档位张数，则该设置被忽略\n%s</string>
+    <string name="preference_expo_bracketing_n_images_per_expo">每个档位连拍张数</string>
+    <string name="preference_expo_bracketing_n_images_per_expo_summary">设置非1值，则总张数设置会失效\n%s</string>
     <string name="preference_expo_bracketing_stops">包围曝光步长（expo）</string>
     <string name="preference_expo_bracketing_stops_summary">最亮/最暗的图像曝光量（expo）增减值，填0无增减\n%s</string>
     <string name="preference_iso_bracketing_stops">包围曝光步长（iso）</string>
@@ -431,9 +434,6 @@
     <string name="video_resume">继续录像</string>
     <string name="preference_show_take_photo">拍照按钮</string>
     <string name="preference_show_take_photo_summary">显示拍照、录像按钮。除非你有其他方法（比如硬件快门、使用音量键），否则不应该取消勾选</string>
-
-
-    <string name="preference_expo_bracketing_n_images_summary">包围曝光的图片数量\n%s</string>
 
     <string name="preference_nr_save_summary">在降噪模式中保存原图。注意这会让保存照片慢很多。\n%s</string>
 

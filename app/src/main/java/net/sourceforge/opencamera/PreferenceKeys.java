@@ -96,6 +96,8 @@ public class PreferenceKeys {
 
     public static final String ExpoBracketingNImagesPreferenceKey = "preference_expo_bracketing_n_images";
 
+    public static final String ExpoBracketingNImagesPerExpoPreferenceKey = "preference_expo_bracketing_n_images_per_expo";
+
     public static final String ExpoBracketingStopsPreferenceKey = "preference_expo_bracketing_stops";
 
     public static final String IsoBracketingStopsPreferenceKey = "preference_iso_bracketing_stops";

@@ -307,6 +307,20 @@
         <item>9</item>
         <item>17</item>
     </string-array>
+    <string-array name="preference_expo_bracketing_n_images_per_expo_entries">
+        <item>1</item>
+        <item>2</item>
+        <item>4</item>
+        <item>6</item>
+        <item>8</item>
+    </string-array>
+    <string-array name="preference_expo_bracketing_n_images_per_expo_values">
+        <item>1</item>
+        <item>2</item>
+        <item>4</item>
+        <item>6</item>
+        <item>8</item>
+    </string-array>
     <string-array name="preference_expo_bracketing_stops_entries">
         <item>0</item>
         <item>0.5</item>

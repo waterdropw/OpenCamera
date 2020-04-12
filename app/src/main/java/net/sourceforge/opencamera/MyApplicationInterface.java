@@ -1361,6 +1361,32 @@ public class MyApplicationInterface extends BasicApplicationInterface {
     }
 
     @Override
+    public int getExpoBracketingNImagesPerExpoPref() {
+        if( MyDebug.LOG )
+            Log.d(TAG, "getExpoBracketingNImagesPerExpoPref");
+        int n_images;
+        PhotoMode photo_mode = getPhotoMode();
+        if( photo_mode == PhotoMode.HDR ) {
+            // always set 3 images for HDR
+            n_images = 1;
+        }
+        else {
+            String n_images_s = sharedPreferences.getString(PreferenceKeys.ExpoBracketingNImagesPerExpoPreferenceKey, "1");
+            try {
+                n_images = Integer.parseInt(n_images_s);
+            }
+            catch(NumberFormatException exception) {
+                if( MyDebug.LOG )
+                    Log.e(TAG, "n_images_s invalid format: " + n_images_s);
+                n_images = 1;
+            }
+        }
+        if( MyDebug.LOG )
+            Log.d(TAG, "n_images = " + n_images);
+        return n_images;
+    }
+
+    @Override
     public double getExpoBracketingStopsPref() {
         if( MyDebug.LOG )
             Log.d(TAG, "getExpoBracketingStopsPref");

@@ -99,6 +99,7 @@ public interface ApplicationInterface {
     float getFocusDistancePref(boolean is_target_distance);
     boolean isExpoBracketingPref(); // whether to enable burst photos with expo bracketing
     int getExpoBracketingNImagesPref(); // how many images to take for exposure bracketing
+    int getExpoBracketingNImagesPerExpoPref();  // how many images to take for each expo
     double getExpoBracketingStopsPref(); // stops per image for exposure bracketing
     double getIsoBracketingStopsPref(); // stops per image for exposure bracketing
     int getFocusBracketingNImagesPref(); // how many images to take for focus bracketing

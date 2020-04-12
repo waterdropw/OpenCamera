@@ -38,6 +38,7 @@ public class CameraController1 extends CameraController {
     private boolean want_expo_bracketing;
     private final static int max_expo_bracketing_n_images = 3; // seem to have problems with 5 images in some cases, e.g., images coming out same brightness on OnePlus 3T
     private int expo_bracketing_n_images = 3;
+    private int expo_bracketing_n_images_per_expo = 1;
     private double expo_bracketing_stops = 2.0;
     private double iso_bracketing_stops = 2.0;
 
@@ -817,6 +818,23 @@ public class CameraController1 extends CameraController {
                 Log.e(TAG, "limiting n_images to max of " + n_images);
         }
         this.expo_bracketing_n_images = n_images;
+    }
+
+    @Override
+    public void setExpoBracketingNImagesPerExpo(int n_images) {
+        if( MyDebug.LOG )
+            Log.d(TAG, "setExpoBracketingNImagesPerExpo: " + n_images);
+        if( n_images <= 1 || (n_images % 2) == 0 ) {
+            if( MyDebug.LOG )
+                Log.e(TAG, "n_images should be an odd number greater than 1");
+            throw new RuntimeException(); // throw as RuntimeException, as this is a programming error
+        }
+        if( n_images > max_expo_bracketing_n_images ) {
+            n_images = max_expo_bracketing_n_images;
+            if( MyDebug.LOG )
+                Log.e(TAG, "limiting n_images to max of " + n_images);
+        }
+        this.expo_bracketing_n_images_per_expo = n_images;
     }
 
     @Override

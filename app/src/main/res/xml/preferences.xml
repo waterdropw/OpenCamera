@@ -767,6 +767,16 @@
 
             <!--  if we move this to another PreferenceGroup, we should update code to remove this Preference -->
             <ListPreference
+                android:key="preference_expo_bracketing_n_images_per_expo"
+                android:title="@string/preference_expo_bracketing_n_images_per_expo"
+                android:summary="@string/preference_expo_bracketing_n_images_per_expo_summary"
+                android:entries="@array/preference_expo_bracketing_n_images_per_expo_entries"
+                android:entryValues="@array/preference_expo_bracketing_n_images_per_expo_values"
+                android:defaultValue="1"
+                />
+
+            <!--  if we move this to another PreferenceGroup, we should update code to remove this Preference -->
+            <ListPreference
                 android:key="preference_expo_bracketing_stops"
                 android:title="@string/preference_expo_bracketing_stops"
                 android:summary="@string/preference_expo_bracketing_stops_summary"

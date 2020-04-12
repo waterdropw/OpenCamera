@@ -304,6 +304,11 @@ public abstract class BasicApplicationInterface implements ApplicationInterface 
     }
 
     @Override
+    public int getExpoBracketingNImagesPerExpoPref() {
+        return 1;
+    }
+
+    @Override
     public double getExpoBracketingStopsPref() {
         return 2.0;
     }

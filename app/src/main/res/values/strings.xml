@@ -316,6 +316,8 @@
 
     <string name="preference_expo_bracketing_n_images">Exposure/ISO Bracketing</string>
     <string name="preference_expo_bracketing_n_images_summary">Number of images for exposure/ISO bracketing mode\n%s</string>
+    <string name="preference_expo_bracketing_n_images_per_expo">Number of images per expo</string>
+    <string name="preference_expo_bracketing_n_images_per_expo_summary">Number of images per expo, total number will be ignored\n%s</string>
     <string name="preference_expo_bracketing_stops">Exposure Bracketing Stops</string>
     <string name="preference_expo_bracketing_stops_summary">How many stops(expo) to subtract/add for the darkest/brightest image, if no need put it 0\n%s</string>
     <string name="preference_iso_bracketing_stops">ISO Bracketing Stops</string>

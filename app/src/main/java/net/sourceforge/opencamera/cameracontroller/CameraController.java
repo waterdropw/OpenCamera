@@ -392,6 +392,7 @@ public abstract class CameraController {
     public abstract void setExpoBracketingNImages(int n_images);
     /** Only relevant if setBurstType() is also called with BURSTTYPE_EXPO.
      */
+    public abstract void setExpoBracketingNImagesPerExpo(int n_images);
     public abstract void setExpoBracketingStops(double stops);
     public abstract void setIsoBracketingStops(double stops);
     public abstract void setUseExpoFastBurst(boolean use_expo_fast_burst);
